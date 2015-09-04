@@ -7,5 +7,5 @@
 !.vimrc
 
 # ...even if they are in subdirectories
-!*/scripts/*
-!*/.vimrc/*
+!*/scripts/
+!*/.vim/
