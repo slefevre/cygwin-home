@@ -3,6 +3,8 @@
 
 # But not these files...
 !.gitignore
+!.vimrc
 
 # ...even if they are in subdirectories
 !*/scripts/*
+!*/.vimrc/*
