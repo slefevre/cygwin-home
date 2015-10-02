@@ -1,3 +1,5 @@
 [user]
 	name = Steve Lefevre
 	email = lefevre.10@osu.edu
+[core]
+	fileMode = false
