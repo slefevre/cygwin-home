@@ -1,11 +1,10 @@
 # Ignore everything
 *
 
-# But not these files...
-!.gitignore
-!.gitconfig
+# But not these files/directories, with some exceptions
+!scripts/
+!scripts/*
+!.vim/
+!.vim/*
+.vim/.netrwhist
 !.vimrc
-
-# ...even if they are in subdirectories
-!*/scripts/
-!*/.vim/
