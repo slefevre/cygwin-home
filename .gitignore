@@ -2,6 +2,7 @@
 *
 
 # But not these files/directories, with some exceptions
+!recipes.txt
 !scripts/
 !scripts/*
 !.vim/
