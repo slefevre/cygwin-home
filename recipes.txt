@@ -3,4 +3,7 @@
 // erase drive
 fdisk -l // identify device
 dd if=/dev/urandom of=/dev/sdN bs=4096
-//
+
+
+// rsync
+rsync -cavszP --progress user@remote:path/to/*files* /home/user/local/path
