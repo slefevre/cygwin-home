@@ -10,3 +10,9 @@ $> sudo fdisk -l
 $> sudo mkdir /media/usb
 $> mount /dev/sdb1 /media/usb
 
+// format html with indentation
+tidy -indent --wrap 0 --vertical-space no --show-warnings no file.html > output-file.html
+
+// show mysql queries realtime
+watch 'mysqladmin proc'
+
