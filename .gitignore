@@ -9,4 +9,6 @@
 !.vim/*
 .vim/.netrwhist
 !.vimrci
+!.bash_profile
+!.bashrc
 !hosts
