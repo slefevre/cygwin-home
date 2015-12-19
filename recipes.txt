@@ -16,3 +16,5 @@ tidy -indent --wrap 0 --vertical-space no --show-warnings no file.html > output-
 // show mysql queries realtime
 watch 'mysqladmin proc'
 
+// find the 10 largest files
+du -hsx * | sort -rh | head -10
