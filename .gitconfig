@@ -2,4 +2,16 @@
 	name = Steve Lefevre
 	email = lefevre.10@osu.edu
 [core]
-	fileMode = false
+  fileMode = false
+[alias]
+  pretty-log = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+
+  introduced = log --diff-filter=A --
+
+  branch-excise = ! "gitddd () { git branch -D $1; git push origin --delete $1; }; gitddd"
+
+  overview = ! "git remote -v; git branch -a; git status;  git show --name-status;"
+
+  purify = ! "giteee() { git reset --hard; git clean -d -f; }; giteee"
+
+  unstage = reset
