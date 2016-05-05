@@ -15,3 +15,5 @@
   purify = ! "giteee() { git reset --hard; git clean -d -f; }; giteee"
 
   unstage = reset
+
+  restore = ! "gitrestore() { git git reset -- $1; git checkout -- $1; }; gitrestore"
