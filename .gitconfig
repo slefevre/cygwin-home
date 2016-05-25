@@ -1,19 +1,46 @@
 [user]
 	name = Steve Lefevre
 	email = lefevre.10@osu.edu
+[push]
+	default = simple
 [core]
-  fileMode = false
+    fileMode = false
+
 [alias]
+
   pretty-log = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 
   introduced = log --diff-filter=A --
 
-  branch-excise = ! "gitddd () { git branch -D $1; git push origin --delete $1; }; gitddd"
+  unstage = reset
 
-  overview = ! "git remote -v; git branch -a; git status;  git show --name-status;"
+  branch-excise = ! "gitbranchexcise () { git branch -D $1; git push origin --delete $1; }; gitbranchexcise"
 
-  purify = ! "giteee() { git reset --hard; git clean -d -f; }; giteee"
+  overview = ! "git rev-parse --show-toplevel; git remote -v; git branch; git status; git rev-parse HEAD;"
+  pwd = ! "git rev-parse --show-toplevel; git remote -v; "
+
+  purify = ! "gitpurify() { git reset --hard; git clean -d -f; }; gitpurify"
 
   unstage = reset
 
-  restore = ! "gitrestore() { git git reset -- $1; git checkout -- $1; }; gitrestore"
+  branch-grow = ! "gitbranchgrow() { git checkout -b $1; git push ${2:-origin} $1; }; gitbranchgrow"
+
+  remove = ! "gitremove() { git diff --diff-filter=D --name-only -z | xargs -0 git rm; }; gitremove"
+  forget  = ! "gitforget() { git diff --diff-filter=D --name-only -z | xargs -0 git rm; }; gitforget"
+
+  staged = diff --cached
+
+  alias = config --get-regexp ^alias\\.
+  aliases = config --get-regexp ^alias\\.
+
+  ignore-filemode = config core.fileMode false
+
+  smart-diff = ! "gitsmartdiff() { git diff $2 --stat=$COLUMNS --stat-graph-width=$(($COLUMNS/5)); }; gitsmartdiff"
+
+  commit-ignore-whitespace = ! "gitcommitignorewhitespace() { git diff -w --no-color | git apply --cached --ignore-whitespace; }; gitcommitignorewhitespace"
+
+  svn-ignore = ! "gitsvnignore() { grep -v svn .gitignore | xargs -I % svn propset svn:ignore % . ; }; gitsvnignore"
+  svn-delete = ! "gitsvndelete() { svn st | grep ^! | cut -b9- | sed 's/^/\"/;s/$/\"/' | xargs svn rm ; }; gitsvndelete"
+  svn-commit = ! "gitsvncommit() { svn add --force . ; svn commit -m 'Updates from git' ; }; gitsvncommit"
+  svn-push   = ! "gitsvnpush() { git svn-ignore; git svn-delete; git svn-commit ; }; gitsvnpush"
+  svn-commit2 = ! "gitsvncommit2() { svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm; svn add --force . ;  svn commit -m \"Updates from git\"; }; gitsvncommit2"
