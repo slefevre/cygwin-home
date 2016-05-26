@@ -29,6 +29,7 @@
   forget  = ! "gitforget() { git diff --diff-filter=D --name-only -z | xargs -0 git rm; }; gitforget"
 
   staged = diff --cached
+  ignored = status --ignored
 
   alias = config --get-regexp ^alias\\.
   aliases = config --get-regexp ^alias\\.
@@ -42,5 +43,5 @@
   svn-ignore = ! "gitsvnignore() { grep -v svn .gitignore | xargs -I % svn propset svn:ignore % . ; }; gitsvnignore"
   svn-delete = ! "gitsvndelete() { svn st | grep ^! | cut -b9- | sed 's/^/\"/;s/$/\"/' | xargs svn rm ; }; gitsvndelete"
   svn-commit = ! "gitsvncommit() { svn add --force . ; svn commit -m 'Updates from git' ; }; gitsvncommit"
-  svn-push   = ! "gitsvnpush() { git svn-ignore; git svn-delete; git svn-commit ; }; gitsvnpush"
+  svn-push   = ! "gitsvnpush() { svn update .; git svn-delete; git svn-commit ; }; gitsvnpush"
   svn-commit2 = ! "gitsvncommit2() { svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm; svn add --force . ;  svn commit -m \"Updates from git\"; }; gitsvncommit2"
