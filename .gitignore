@@ -8,8 +8,9 @@
 !.vim/
 !.vim/*
 .vim/.netrwhist
-!.vimrci
+!.vimrc
 !.bash_profile
+!.bash_aliases
 !.bashrc
 !hosts
 !.gitconfig
