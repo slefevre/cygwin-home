@@ -9,6 +9,7 @@
 !.vim/*
 .vim/.netrwhist
 !.vimrc
+!.profile
 !.bash_profile
 !.bash_aliases
 !.bashrc
