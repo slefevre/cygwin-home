@@ -43,9 +43,11 @@ fi
 #   INFOPATH="${HOME}/info:${INFOPATH}"
 # fi
 #
-eval `keychain --eval --agents ssh id_rsa`
+
+if [ -z $SSH_AUTH_SOCK ] ; then
+    eval `keychain --eval --agents ssh id_rsa`
+fi
 
 source ~/.profile
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
