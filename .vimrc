@@ -9,8 +9,6 @@ endif
 
 set number
 
-
-
 filetype plugin indent on
 
 " On pressing tab, insert 4 spaces
