@@ -39,7 +39,8 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 " delete trailing whitespace on write
 autocmd BufWritePre *.php :%s/\s\+$//e
 
-
+" delete blank lines at the end of the file
+au BufWritePre *.txt $put _ | $;?\(^\s*$\)\@!?+1,$d
 
 set autoindent
 set comments=s1:/**,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
