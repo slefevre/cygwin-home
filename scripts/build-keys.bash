@@ -9,7 +9,7 @@ if [ "$pw1" != "$pw2" ]; then
   exit 1
 fi
 
-hosts=($(cut -d' ' -f1 <~/.ssh/known_hosts|cut -d',' -f1|cut -d':' -f1))
+hosts=($(cut -d' ' -f1 <~/.ssh/known_hosts|cut -d',' -f1|cut -d':' -f1|tr -d "[]"))
 
 for host in "${hosts[@]}"
 do
