@@ -15,7 +15,6 @@ hosts=($(cut -d' ' -f1 <~/.ssh/known_hosts|cut -d',' -f1|cut -d':' -f1|tr -d "[]
 
 for host in "${hosts[@]}"
 do
-   echo "$host"
-   ssh-keygen -t ed25519 -C "$email" -P "$pw1" -f "$system_$email_$host.private.id_rsa"
-   # or do whatever with individual element of the array
+  echo "$systemIII$emailIII$host.id_ed25519"
+  ssh-keygen -t ed25519 -C "$email" -P "$pw1" -f $(printf "%s_%s_%s.id_Ed25519" "$system" "$email" "$host")
 done
