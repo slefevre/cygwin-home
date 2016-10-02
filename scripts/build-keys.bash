@@ -15,6 +15,7 @@ hosts=($(cut -d' ' -f1 <~/.ssh/known_hosts|cut -d',' -f1|cut -d':' -f1|tr -d "[]
 
 for host in "${hosts[@]}"
 do
-  echo "$systemIII$emailIII$host.id_ed25519"
-  ssh-keygen -t ed25519 -C "$email" -P "$pw1" -f $(printf "%s_%s_%s.id_Ed25519" "$system" "$email" "$host")
+  keyfile=$(printf "%s_%s_%s.id_ed25519" "$system" "$email" "$host")
+  ssh-keygen -t ed25519 -C "$email" -P "$pw1" -f "$keyfile"
+  #cat $keyfile | ssh "$host" 'cat >> .ssh/authorized_keys'
 done
