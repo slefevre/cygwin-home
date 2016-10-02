@@ -8,3 +8,11 @@ if [ "$pw1" != "$pw2" ]; then
   echo Passwords do not match.
   exit 1
 fi
+
+hosts=($(cut -d' ' -f1 <~/.ssh/known_hosts))
+
+for host in "${hosts[@]}"
+do
+   echo "$host"
+   # or do whatever with individual element of the array
+done
