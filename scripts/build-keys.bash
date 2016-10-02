@@ -1,5 +1,6 @@
 #!/bin/bash
 
+read -p "Please enter your email: " email
 read -sp "Please enter your new password: " pw1
 echo
 read -sp "Please re-enter your new password: " pw2
