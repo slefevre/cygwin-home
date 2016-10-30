@@ -4,7 +4,7 @@ read -p "Please enter your email: " email
 read -p "Please enter the host name of the target system: " system
 read -sp "Please enter your new password: " pw1
 echo
-read -sp "Please re-enter your new password: " pw2
+read -sp "Please confirm your new password: " pw2
 if [ "$pw1" != "$pw2" ]; then
   echo
   echo Passwords do not match.
@@ -19,5 +19,9 @@ for host in "${hosts[@]}"
 do
   keyfile=$(printf "%s_keys/%s_%s_%s.id_ed25519" "$system" "$system" "$email" "$host")
   ssh-keygen -t ed25519 -C $(printf "%s_%s" "$email" "$system") -P "$pw1" -f "$keyfile"
-  #cat $keyfile | ssh "$host" 'cat >> .ssh/authorized_keys'
+  read -r -p "ssh new key to host $host? [y/n] " response
+  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
+  then
+    cat $keyfile.pub | ssh "$host" 'cat >> .ssh/authorized_keys'
+  fi
 done
