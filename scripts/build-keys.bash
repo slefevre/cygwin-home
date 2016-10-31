@@ -17,11 +17,14 @@ mkdir $(printf "%s_keys" "$system")
 
 for host in "${hosts[@]}"
 do
-  keyfile=$(printf "%s_keys/%s_%s_%s.id_ed25519" "$system" "$system" "$email" "$host")
-  ssh-keygen -t ed25519 -C $(printf "%s_%s" "$email" "$system") -P "$pw1" -f "$keyfile"
-  read -r -p "ssh new key to host $host? [y/n] " response
-  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
-  then
-    cat $keyfile.pub | ssh "$host" 'cat >> .ssh/authorized_keys'
+  read -r -p "Create key for host $host? [y/n] " response
+  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    keyfile=$(printf "%s_keys/%s_%s_%s.id_ed25519" "$system" "$system" "$email" "$host")
+    ssh-keygen -t ed25519 -C $(printf "%s_%s" "$email" "$system") -P "$pw1" -f "$keyfile"
+    read -r -p "ssh new key to host $host? [y/n] " response
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+      cat $keyfile.pub | ssh -vvv "$host" 'cat >> .ssh/authorized_keys'
+  #   ssh-copy-id -i $keyfile.pub "$host"
+    fi
   fi
 done
